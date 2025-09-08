@@ -13,6 +13,8 @@ TagManager:
   - BuckleNotch
   - BuckleNotch1
   - BuckleInsert1
+  - BuckleInsert2
+  - BuckleNotch2
   layers:
   - Default
   - TransparentFX

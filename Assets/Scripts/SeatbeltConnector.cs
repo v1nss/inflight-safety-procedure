@@ -23,7 +23,6 @@ public class SeatbeltConnector : MonoBehaviour
 
     private XRGrabInteractable grabInteractable;
     private SeatbeltConnector connectedTo; // Reference to what we're connected to
-    private BuckleConnector buckleConnector;
 
     public bool IsConnected => isConnected;
     public SeatbeltConnector ConnectedTo => connectedTo;
@@ -31,7 +30,6 @@ public class SeatbeltConnector : MonoBehaviour
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-        buckleConnector = GetComponent<BuckleConnector>();
 
         if (triggerZone == null)
             Debug.LogError($"{gameObject.name}: TriggerZone not assigned!");
@@ -138,17 +136,6 @@ public class SeatbeltConnector : MonoBehaviour
         target.isConnected = true;
         target.connectedTo = this;
 
-        // 🔹 Tell parent buckle connector (if exists) to snap whole buckle to vest
-        if (buckleConnector != null)
-        {
-            buckleConnector.SnapToVest();
-            Debug.LogWarning($"{gameObject.name}: parent to snap to vest!");
-        }
-        else
-        {
-            Debug.LogWarning($"{gameObject.name}: No BuckleConnector found in parent to snap to vest!");
-        }
-
         OnConnected(target);
         target.OnConnected(this);
     }
@@ -199,7 +186,7 @@ public class SeatbeltConnector : MonoBehaviour
     {
         isConnected = false;
         connectedTo = null;
-        grabInteractable.enabled = true;
+        grabInteractable.enabled = false;
         if (triggerZone) triggerZone.enabled = true;
         if (grabCollider) grabCollider.enabled = true;
         //transform.SetParent(null, true);
