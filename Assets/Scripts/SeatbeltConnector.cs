@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(XRGrabInteractable), typeof(Rigidbody))]
@@ -20,6 +21,10 @@ public class SeatbeltConnector : MonoBehaviour
 
     [Header("References")]
     public Transform vestSnapPoint;
+
+    [Header("Events")]
+    public UnityEvent onConnectedEvent;
+    public UnityEvent onDisconnectedEvent;
 
     private XRGrabInteractable grabInteractable;
     private SeatbeltConnector connectedTo; // Reference to what we're connected to
@@ -53,10 +58,9 @@ public class SeatbeltConnector : MonoBehaviour
 
     private void Start()
     {
-        // Reset state so it’s always grabbable at start
+        // Reset state so it's always grabbable at start
         ForceResetGrabState();
         Debug.Log($"{gameObject.name} - Start state: Grabbable={grabInteractable.enabled}, Connected={isConnected}");
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -99,42 +103,26 @@ public class SeatbeltConnector : MonoBehaviour
                 .CancelInteractableSelection(target.grabInteractable as UnityEngine.XR.Interaction.Toolkit.Interactables.IXRSelectInteractable);
         }
 
-        // 🔹 Disable grabbing & physics on both sides
+        // Disable grabbing & physics on both sides
         grabInteractable.enabled = false;
         target.grabInteractable.enabled = false;
 
-        //Rigidbody myRb = GetComponent<Rigidbody>();
-        //Rigidbody targetRb = target.GetComponent<Rigidbody>();
-
-        //if (myRb)
-        //{
-        //    myRb.isKinematic = true;
-        //    myRb.linearVelocity = Vector3.zero;
-        //    myRb.angularVelocity = Vector3.zero;
-        //}
-        //if (targetRb)
-        //{
-        //    targetRb.isKinematic = true;
-        //    targetRb.linearVelocity = Vector3.zero;
-        //    targetRb.angularVelocity = Vector3.zero;
-        //}
-
         if (triggerZone) triggerZone.enabled = false;
+        if (target.triggerZone) target.triggerZone.enabled = false;
 
-        // 🔹 Snap into place
+        // Snap into place
         transform.SetPositionAndRotation(target.attachPoint.position, target.attachPoint.rotation);
         target.transform.SetPositionAndRotation(vestSnapPoint.position, vestSnapPoint.rotation);
         transform.SetPositionAndRotation(vestSnapPoint.position, vestSnapPoint.rotation);
         transform.SetParent(target.attachPoint, true);
-        
-
-        Debug.Log($"BuckLLLLLLLLLLle {gameObject.name} snapped directly to vest at {attachPoint.position}");
 
         // Update connection states
         isConnected = true;
         connectedTo = target;
         target.isConnected = true;
         target.connectedTo = this;
+
+        Debug.Log($"{gameObject.name} connected to {target.gameObject.name}");
 
         OnConnected(target);
         target.OnConnected(this);
@@ -146,11 +134,14 @@ public class SeatbeltConnector : MonoBehaviour
 
         SeatbeltConnector other = connectedTo;
 
+        // Unparent and reset transform
         transform.SetParent(null, true);
 
+        // Reset connection states
         isConnected = false;
         connectedTo = null;
 
+        // Re-enable grabbing
         grabInteractable.enabled = true;
         if (triggerZone) triggerZone.enabled = true;
 
@@ -169,9 +160,16 @@ public class SeatbeltConnector : MonoBehaviour
             other.OnDisconnected(this);
     }
 
-    // Override for custom logic
-    protected virtual void OnConnected(SeatbeltConnector other) { }
-    protected virtual void OnDisconnected(SeatbeltConnector other) { }
+    // Override for custom logic - now properly invokes events
+    protected virtual void OnConnected(SeatbeltConnector other)
+    {
+        onConnectedEvent?.Invoke();
+    }
+
+    protected virtual void OnDisconnected(SeatbeltConnector other)
+    {
+        onDisconnectedEvent?.Invoke();
+    }
 
     public bool TryConnectTo(SeatbeltConnector target)
     {
@@ -184,13 +182,34 @@ public class SeatbeltConnector : MonoBehaviour
     [ContextMenu("Force Reset Grab State")]
     public void ForceResetGrabState()
     {
+        // If we're connected, disconnect first
+        if (isConnected)
+        {
+            Disconnect();
+            return;
+        }
+
         isConnected = false;
         connectedTo = null;
-        grabInteractable.enabled = false;
+        grabInteractable.enabled = true; // Should be enabled for grabbing
         if (triggerZone) triggerZone.enabled = true;
         if (grabCollider) grabCollider.enabled = true;
-        //transform.SetParent(null, true);
+
         Debug.Log($"{gameObject.name} grab state forcefully reset");
+    }
+
+    [ContextMenu("Test Connect Event")]
+    public void TestConnectEvent()
+    {
+        Debug.Log($"Testing connect event for {gameObject.name}");
+        onConnectedEvent?.Invoke();
+    }
+
+    [ContextMenu("Test Disconnect Event")]
+    public void TestDisconnectEvent()
+    {
+        Debug.Log($"Testing disconnect event for {gameObject.name}");
+        onDisconnectedEvent?.Invoke();
     }
 
     private void OnValidate()

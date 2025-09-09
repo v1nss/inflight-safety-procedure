@@ -189,6 +189,7 @@ RectTransform:
   - {fileID: 215747672}
   - {fileID: 188330624}
   - {fileID: 726292564}
+  - {fileID: 915960142}
   m_Father: {fileID: 1621802629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -617,7 +618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &291584019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1139,6 +1140,12 @@ MonoBehaviour:
   grabCollider: {fileID: 579573639}
   isConnected: 0
   vestSnapPoint: {fileID: 1943645696}
+  onConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &579573638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,6 +1452,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.001, y: 0.016, z: 0.0025}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &644997392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644997393}
+  m_Layer: 0
+  m_Name: BuckleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644997393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644997392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1595555224}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &672593802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,8 +1944,16 @@ PrefabInstance:
       value: BuckleNotch
       objectReference: {fileID: 0}
     - target: {fileID: 1369364712218955, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
+      propertyPath: m_Name
+      value: BotBuckle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369364712218955, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392878472428729, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
+      propertyPath: m_Name
+      value: TopBuckle
       objectReference: {fileID: 0}
     - target: {fileID: 1392878472428729, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       propertyPath: m_IsActive
@@ -1924,6 +1970,10 @@ PrefabInstance:
     - target: {fileID: 1422183595828510, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       propertyPath: m_TagString
       value: BuckleInsert
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592345552971390, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
+      propertyPath: m_Name
+      value: MidBuckle
       objectReference: {fileID: 0}
     - target: {fileID: 1609096001146834, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       propertyPath: m_IsActive
@@ -2074,6 +2124,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4552142652464083, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 855171512}
+    - targetCorrespondingSourceObject: {fileID: 4552142652464083, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 644997393}
     - targetCorrespondingSourceObject: {fileID: 4308088257374246, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1981274248}
@@ -2111,12 +2164,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1339299950586040, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1595555229}
-    - targetCorrespondingSourceObject: {fileID: 1392878472428729, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2129434004}
-    - targetCorrespondingSourceObject: {fileID: 1392878472428729, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2129434005}
     - targetCorrespondingSourceObject: {fileID: 1228681167420003, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1450215702}
@@ -2240,6 +2287,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &915960141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 915960142}
+  - component: {fileID: 915960143}
+  m_Layer: 5
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &915960142
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915960141}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 135981035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &915960143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915960141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67fe55438ce799498877b334b7f44f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TopBuckleIndicator: {fileID: 1317146183}
+  MidBuckleIndicator: {fileID: 434278942}
+  BotBuckleIndicator: {fileID: 1637346075}
+  connectedColor: {r: 0, g: 1, b: 0, a: 1}
+  disconnectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!64 &979701056 stripped
 MeshCollider:
   m_CorrespondingSourceObject: {fileID: 2502964468967929294, guid: 5eff1bc508e659641a1d7609391be473, type: 3}
@@ -2445,7 +2545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1069099662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2594,6 +2694,12 @@ MonoBehaviour:
   grabCollider: {fileID: 1073856300}
   isConnected: 0
   vestSnapPoint: {fileID: 1044087058}
+  onConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1073856299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,7 +2983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -468, y: -81.1}
+  m_AnchoredPosition: {x: -468, y: -82}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116840182
@@ -2947,6 +3053,12 @@ MonoBehaviour:
   grabCollider: {fileID: 1156637964}
   isConnected: 0
   vestSnapPoint: {fileID: 1250912305}
+  onConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1156637963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3246,6 +3358,12 @@ MonoBehaviour:
   grabCollider: {fileID: 1191621342}
   isConnected: 0
   vestSnapPoint: {fileID: 1044087058}
+  onConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1191621341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3810,6 +3928,12 @@ MonoBehaviour:
   grabCollider: {fileID: 1356632326}
   isConnected: 0
   vestSnapPoint: {fileID: 1943645696}
+  onConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1356632325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4075,7 +4199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1443761788
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4150,7 +4274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1446714928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4237,6 +4361,12 @@ MonoBehaviour:
   grabCollider: {fileID: 979701056}
   isConnected: 0
   vestSnapPoint: {fileID: 1250912305}
+  onConnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1450215699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5127,37 +5257,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1356632322}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
---- !u!1 &2129434002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1392878472428729, guid: 3eba15066bb0a0d48bff7c807b0eda36, type: 3}
-  m_PrefabInstance: {fileID: 854512505}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2129434004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129434002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a43fb0de632ff8f4989ce4b706b2afff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vestSnapPoint: {fileID: 1250912305}
-  debugMode: 1
---- !u!114 &2129434005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129434002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e1d2386a53d60643812b7806eabdec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6539195896796864804
 PrefabInstance:
   m_ObjectHideFlags: 0

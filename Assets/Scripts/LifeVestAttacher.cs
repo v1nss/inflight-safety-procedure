@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(XRGrabInteractable), typeof(Rigidbody))]
 public class LifeVestAttacher : MonoBehaviour
 {
+    [Header("Events")]
+    public UnityEvent onAttachedEvent;
+    public UnityEvent onDetachedEvent;
+
     [Header("Attach Settings")]
     [SerializeField] private string bodyTag = "BodyAnchor";
     [SerializeField] private Transform attachOffset;
@@ -129,7 +134,6 @@ public class LifeVestAttacher : MonoBehaviour
             }
         }
 
-
         transform.SetParent(bodyAnchor, true);
 
         // Disable parent grab AFTER handling children
@@ -143,6 +147,7 @@ public class LifeVestAttacher : MonoBehaviour
         }
 
         isAttached = true;
+        onAttachedEvent?.Invoke(); // Invoke attachment event
         Debug.Log($"{gameObject.name} attached to body! Seatbelt connectors are now interactive.");
     }
 
@@ -186,6 +191,7 @@ public class LifeVestAttacher : MonoBehaviour
         }
 
         isAttached = false;
+        onDetachedEvent?.Invoke(); // Invoke detachment event
         Debug.Log($"{gameObject.name} detached from body! Seatbelt connectors disabled.");
     }
 
