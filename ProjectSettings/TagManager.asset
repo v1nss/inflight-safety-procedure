@@ -15,6 +15,7 @@ TagManager:
   - BuckleInsert1
   - BuckleInsert2
   - BuckleNotch2
+  - TopBuckle
   layers:
   - Default
   - TransparentFX
