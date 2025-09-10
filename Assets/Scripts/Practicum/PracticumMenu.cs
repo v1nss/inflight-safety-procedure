@@ -25,7 +25,7 @@ public class PracticumMenu : MonoBehaviour {
 
     public void StartAirMask()
     {
-
+        SceneTransitionManager.singleton.GoToSceneAsync(3);
     }
 
     public void StartSeatbelt()
@@ -40,7 +40,7 @@ public class PracticumMenu : MonoBehaviour {
 
     public void StartAirSack()
     {
-
+        SceneTransitionManager.singleton.GoToSceneAsync(4);
     }
 
     public void StartExitDoors()
