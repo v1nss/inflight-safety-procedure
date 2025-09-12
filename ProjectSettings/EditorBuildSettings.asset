@@ -12,19 +12,19 @@ EditorBuildSettings:
     path: Assets/Scenes/Practicum.unity
     guid: 31f60627c168d7e49811e94953cbcb70
   - enabled: 1
-    path: Assets/Scenes/Lifevest.unity
+    path: Assets/Scenes/Practicum Scene/Lifevest.unity
     guid: fba845a85c900a24ab31fab775e56ca6
   - enabled: 1
-    path: Assets/Scenes/Airmask.unity
+    path: Assets/Scenes/Practicum Scene/Airmask.unity
     guid: da74e5cdf79a031429e44d01439f6479
   - enabled: 1
-    path: Assets/Scenes/AirSack.unity
+    path: Assets/Scenes/Practicum Scene/AirSack.unity
     guid: dd1e7df1e8f828a4f84864a36cc57cf4
   - enabled: 1
-    path: Assets/Scenes/Seatbelt.unity
+    path: Assets/Scenes/Practicum Scene/Seatbelt.unity
     guid: a90d873cdd41740498b86dc08b7a67b4
   - enabled: 1
-    path: Assets/Scenes/ExitDoors.unity
+    path: Assets/Scenes/Practicum Scene/ExitDoors.unity
     guid: 712911e371c946d4fbf792b69d1252bb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

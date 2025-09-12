@@ -16,6 +16,7 @@ TagManager:
   - BuckleInsert2
   - BuckleNotch2
   - TopBuckle
+  - FaceAnchor
   layers:
   - Default
   - TransparentFX
