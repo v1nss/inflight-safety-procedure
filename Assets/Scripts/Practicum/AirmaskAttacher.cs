@@ -51,7 +51,6 @@ public class AirmaskAttacher : MonoBehaviour
         if (grabInteractable.isSelected)
             grabInteractable.interactionManager.SelectExit(grabInteractable.firstInteractorSelecting, grabInteractable);
 
-        //transform.SetPositionAndRotation(faceAnchor.position, faceAnchor.rotation);
         transform.SetParent(faceAnchor);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;

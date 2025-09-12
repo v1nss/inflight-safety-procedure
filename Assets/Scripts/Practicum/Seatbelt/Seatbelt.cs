@@ -18,6 +18,9 @@ public class Seatbelt: MonoBehaviour
     [Header("Connection State")]
     [SerializeField] private bool isBuckled = false;
 
+    [Header("References")]
+    public Transform BuckleSnapPoint;
+
     [Header("Events")]
     public UnityEvent onBuckledEvent;
     public UnityEvent onUnbuckledEvent;
@@ -72,13 +75,23 @@ public class Seatbelt: MonoBehaviour
         // Check if we're entering the buckle area
         if (!other.CompareTag("SeatbeltBuckle")) return;
 
-        // Check if we need to be grabbed to connect
-        if (requireGrabToConnect && !grabInteractable.isSelected) return;
+        Seatbelt otherConnector = other.GetComponent<Seatbelt>();
+        if (otherConnector == null || otherConnector.isBuckled) return;
 
-        BuckleSeatbelt();
+
+        // Check if we need to be grabbed to connect
+        if (requireGrabToConnect)
+        {
+            bool thisIsGrabbed = grabInteractable.isSelected;
+            bool otherIsGrabbed = otherConnector.grabInteractable.isSelected;
+
+            if (!thisIsGrabbed || !otherIsGrabbed) return;
+        }
+
+        BuckleSeatbelt(otherConnector);
     }
 
-    private void BuckleSeatbelt()
+    private void BuckleSeatbelt(Seatbelt target)
     {
         // Force release if currently being grabbed
         if (grabInteractable.isSelected)
@@ -87,9 +100,18 @@ public class Seatbelt: MonoBehaviour
                 .CancelInteractableSelection(grabInteractable as UnityEngine.XR.Interaction.Toolkit.Interactables.IXRSelectInteractable);
         }
 
+        if (target.grabInteractable.isSelected)
+        {
+            target.grabInteractable.interactionManager
+                .CancelInteractableSelection(target.grabInteractable as UnityEngine.XR.Interaction.Toolkit.Interactables.IXRSelectInteractable);
+        }
+
         // Disable grabbing and trigger detection
         grabInteractable.enabled = false;
+        target.grabInteractable.enabled = false;
+
         if (triggerZone) triggerZone.enabled = false;
+        if (target.triggerZone) target.triggerZone.enabled = false;
 
         // Snap to buckle position
         if (snapPoint != null)
@@ -97,6 +119,11 @@ public class Seatbelt: MonoBehaviour
             transform.SetPositionAndRotation(snapPoint.position, snapPoint.rotation);
             transform.SetParent(snapPoint, true);
         }
+
+        transform.SetPositionAndRotation(target.snapPoint.position, target.snapPoint.rotation);
+        target.transform.SetPositionAndRotation(BuckleSnapPoint.position, BuckleSnapPoint.rotation);
+        transform.SetPositionAndRotation(BuckleSnapPoint.position, BuckleSnapPoint.rotation);
+        transform.SetParent(target.snapPoint, true);
 
         // Update state
         isBuckled = true;
@@ -147,14 +174,14 @@ public class Seatbelt: MonoBehaviour
         Debug.Log($"{gameObject.name} reset to grabbable state");
     }
 
-    [ContextMenu("Force Buckle")]
-    public void ForceBuckle()
-    {
-        if (!isBuckled)
-        {
-            BuckleSeatbelt();
-        }
-    }
+    //[ContextMenu("Force Buckle")]
+    //public void ForceBuckle()
+    //{
+    //    if (!isBuckled)
+    //    {
+    //        BuckleSeatbelt();
+    //    }
+    //}
 
     [ContextMenu("Force Unbuckle")]
     public void ForceUnbuckle()
