@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(XRGrabInteractable), typeof(Rigidbody))]
-public class Seatbelt: MonoBehaviour
+public class Seatbelt : MonoBehaviour
 {
     [Header("Seatbelt Settings")]
     [SerializeField] private Transform snapPoint; // Where this connector snaps to when buckled
@@ -26,15 +26,25 @@ public class Seatbelt: MonoBehaviour
     public UnityEvent onUnbuckledEvent;
 
     private XRGrabInteractable grabInteractable;
+    private Rigidbody rb;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Transform originalParent;
+    private LineManager lineManager; // Reference to the LineManager
 
     public bool IsBuckled => isBuckled;
 
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        rb = GetComponent<Rigidbody>();
+
+        // Find the LineManager in parent
+        lineManager = GetComponentInParent<LineManager>();
+        if (lineManager == null)
+        {
+            Debug.LogWarning($"{gameObject.name}: No LineManager found in parent!");
+        }
 
         // Store original transform data
         originalPosition = transform.position;
@@ -78,7 +88,6 @@ public class Seatbelt: MonoBehaviour
         Seatbelt otherConnector = other.GetComponent<Seatbelt>();
         if (otherConnector == null || otherConnector.isBuckled) return;
 
-
         // Check if we need to be grabbed to connect
         if (requireGrabToConnect)
         {
@@ -113,34 +122,80 @@ public class Seatbelt: MonoBehaviour
         if (triggerZone) triggerZone.enabled = false;
         if (target.triggerZone) target.triggerZone.enabled = false;
 
-        // Snap to buckle position
-        if (snapPoint != null)
+        // Snap both connectors together first
+        Vector3 midPoint = (transform.position + target.transform.position) / 2f;
+        transform.position = midPoint;
+        target.transform.position = midPoint;
+
+        // Then snap to the designated buckle snap point
+        if (target.BuckleSnapPoint != null && BuckleSnapPoint != null)
         {
-            transform.SetPositionAndRotation(snapPoint.position, snapPoint.rotation);
-            transform.SetParent(snapPoint, true);
+            // This object snaps to target’s buckle
+            transform.SetPositionAndRotation(target.BuckleSnapPoint.position, target.BuckleSnapPoint.rotation);
+            transform.SetParent(target.BuckleSnapPoint, true);
+
+            // Target snaps to this object’s buckle
+            target.transform.SetPositionAndRotation(BuckleSnapPoint.position, BuckleSnapPoint.rotation);
+            target.transform.SetParent(BuckleSnapPoint, true);
+        }
+        else if (snapPoint != null && target.snapPoint != null)
+        {
+            transform.SetPositionAndRotation(target.snapPoint.position, target.snapPoint.rotation);
+            transform.SetParent(target.snapPoint, true);
+
+            target.transform.SetPositionAndRotation(snapPoint.position, snapPoint.rotation);
+            target.transform.SetParent(snapPoint, true);
         }
 
-        transform.SetPositionAndRotation(target.snapPoint.position, target.snapPoint.rotation);
-        target.transform.SetPositionAndRotation(BuckleSnapPoint.position, BuckleSnapPoint.rotation);
-        transform.SetPositionAndRotation(BuckleSnapPoint.position, BuckleSnapPoint.rotation);
-        transform.SetParent(target.snapPoint, true);
+        // Make rigidbodies kinematic to prevent physics interference
+        rb.isKinematic = true;
+        target.rb.isKinematic = true;
 
-        // Update state
+        // Update state for both connectors
         isBuckled = true;
+        target.isBuckled = true;
 
-        Debug.Log($"{gameObject.name} buckled!");
+        Debug.Log($"{gameObject.name} and {target.gameObject.name} buckled together!");
 
-        // Trigger event
+        // Notify LineManager that seatbelt is buckled
+        if (lineManager != null)
+        {
+            lineManager.OnSeatbeltBuckled();
+        }
+        if (target.lineManager != null)
+        {
+            target.lineManager.OnSeatbeltBuckled();
+        }
+
+        // Trigger events
         onBuckledEvent?.Invoke();
+        target.onBuckledEvent?.Invoke();
     }
 
     public void UnbuckleSeatbelt()
     {
         if (!isBuckled) return;
 
+        // Find the other buckled seatbelt (if any)
+        Seatbelt[] allSeatbelts = FindObjectsOfType<Seatbelt>();
+        Seatbelt otherBuckled = null;
+
+        foreach (Seatbelt seatbelt in allSeatbelts)
+        {
+            if (seatbelt != this && seatbelt.isBuckled &&
+                Vector3.Distance(seatbelt.transform.position, transform.position) < 0.1f)
+            {
+                otherBuckled = seatbelt;
+                break;
+            }
+        }
+
         // Reset transform to original state
         transform.SetParent(originalParent, true);
         transform.SetPositionAndRotation(originalPosition, originalRotation);
+
+        // Reset rigidbody
+        rb.isKinematic = false;
 
         // Re-enable grabbing and trigger detection
         grabInteractable.enabled = true;
@@ -149,7 +204,33 @@ public class Seatbelt: MonoBehaviour
         // Update state
         isBuckled = false;
 
+        // Unbuckle the other connector too
+        if (otherBuckled != null)
+        {
+            otherBuckled.transform.SetParent(otherBuckled.originalParent, true);
+            otherBuckled.transform.SetPositionAndRotation(otherBuckled.originalPosition, otherBuckled.originalRotation);
+            otherBuckled.rb.isKinematic = false;
+            otherBuckled.grabInteractable.enabled = true;
+            if (otherBuckled.triggerZone) otherBuckled.triggerZone.enabled = true;
+            otherBuckled.isBuckled = false;
+
+            // Notify other's LineManager
+            if (otherBuckled.lineManager != null)
+            {
+                otherBuckled.lineManager.OnSeatbeltUnbuckled();
+            }
+
+            otherBuckled.onUnbuckledEvent?.Invoke();
+            Debug.Log($"{otherBuckled.gameObject.name} also unbuckled!");
+        }
+
         Debug.Log($"{gameObject.name} unbuckled!");
+
+        // Notify LineManager that seatbelt is unbuckled
+        if (lineManager != null)
+        {
+            lineManager.OnSeatbeltUnbuckled();
+        }
 
         // Trigger event
         onUnbuckledEvent?.Invoke();
@@ -170,18 +251,10 @@ public class Seatbelt: MonoBehaviour
         grabInteractable.enabled = true;
         if (triggerZone) triggerZone.enabled = true;
         if (grabCollider) grabCollider.enabled = true;
+        rb.isKinematic = false;
 
         Debug.Log($"{gameObject.name} reset to grabbable state");
     }
-
-    //[ContextMenu("Force Buckle")]
-    //public void ForceBuckle()
-    //{
-    //    if (!isBuckled)
-    //    {
-    //        BuckleSeatbelt();
-    //    }
-    //}
 
     [ContextMenu("Force Unbuckle")]
     public void ForceUnbuckle()

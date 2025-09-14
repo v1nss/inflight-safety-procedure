@@ -18,9 +18,12 @@ public class LineManager : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     private bool isGrabbed = false;
 
+    public Seatbelt seatbelt;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        seatbelt = spring2.GetComponent<Seatbelt>();
 
         // Setup line appearance
         lineRenderer.positionCount = 2;
@@ -67,8 +70,8 @@ public class LineManager : MonoBehaviour
                 lineRenderer.SetPosition(1, spring2.position);
             }
 
-            // If not grabbed, force spring2 back to original position
-            if (!isGrabbed)
+            // Only reset position if not grabbed AND not buckled
+            if (!isGrabbed && !seatbelt.IsBuckled)
             {
                 // Use more robust position checking
                 float distance = Vector3.Distance(spring2.position, originalSpring2Pos);
@@ -98,20 +101,32 @@ public class LineManager : MonoBehaviour
     {
         isGrabbed = false;
 
-        // Instantly snap back to original position and rotation
-        if (spring2 != null)
+        // Only snap back to original position if not buckled
+        if (spring2 != null && !seatbelt.IsBuckled)
         {
             spring2.position = originalSpring2Pos;
             spring2.rotation = originalSpring2Rot;
+
+            Debug.Log("Spring2 released - Snapped back to original position");
+        }
+        else if (seatbelt.IsBuckled)
+        {
+            Debug.Log("Spring2 released but buckled - Staying in buckled position");
         }
 
-        // Hide the line when released (if specified)
-        if (hideLineWhenNotGrabbed && lineRenderer != null)
+        // Hide the line when released (if specified) and not buckled
+        if (hideLineWhenNotGrabbed && lineRenderer != null && !seatbelt.IsBuckled)
         {
             lineRenderer.enabled = false;
         }
+        else if (seatbelt.IsBuckled)
+        {
+            // Keep line visible when buckled, or hide based on your preference
+            // You can change this behavior as needed
+            lineRenderer.enabled = false; // or true if you want to keep it visible when buckled
+        }
 
-        Debug.Log("Spring2 released - Snapped back to original position");
+        Debug.Log($"Seatbelt buckled state: {seatbelt.IsBuckled}");
     }
 
     void OnDestroy()
@@ -135,7 +150,8 @@ public class LineManager : MonoBehaviour
 
     public void ResetSpring2Position()
     {
-        if (spring2 != null)
+        // Only reset if not buckled
+        if (spring2 != null && !seatbelt.IsBuckled)
         {
             spring2.position = originalSpring2Pos;
             spring2.rotation = originalSpring2Rot;
@@ -150,6 +166,33 @@ public class LineManager : MonoBehaviour
 
             Debug.Log($"Spring2 reset to original position: {originalSpring2Pos}");
         }
+        else if (seatbelt.IsBuckled)
+        {
+            Debug.Log("Cannot reset position - Seatbelt is buckled");
+        }
+    }
+
+    // Method to handle when seatbelt gets buckled (call this from Seatbelt script)
+    public void OnSeatbeltBuckled()
+    {
+        // Keep the line visible when buckled
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = true;
+        }
+        Debug.Log("LineManager: Seatbelt buckled - Line staying visible");
+    }
+
+    // Method to handle when seatbelt gets unbuckled (call this from Seatbelt script)
+    public void OnSeatbeltUnbuckled()
+    {
+        // Reset to original position when unbuckled
+        if (spring2 != null)
+        {
+            spring2.position = originalSpring2Pos;
+            spring2.rotation = originalSpring2Rot;
+        }
+        Debug.Log("LineManager: Seatbelt unbuckled - Reset to original position");
     }
 
     // Force show line for testing

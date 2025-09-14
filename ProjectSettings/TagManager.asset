@@ -17,6 +17,7 @@ TagManager:
   - BuckleNotch2
   - TopBuckle
   - FaceAnchor
+  - SeatbeltBuckle
   layers:
   - Default
   - TransparentFX
