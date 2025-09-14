@@ -140,7 +140,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        // Poll vest attachment state since events aren't implemented yet
+        // Poll vest attachment state
         if (vestAttacher != null && vestIndicator != null)
         {
             bool currentState = vestAttacher.IsAttached;
