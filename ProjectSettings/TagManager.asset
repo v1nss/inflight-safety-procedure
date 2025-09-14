@@ -18,6 +18,7 @@ TagManager:
   - TopBuckle
   - FaceAnchor
   - SeatbeltBuckle
+  - VomitContactPoint
   layers:
   - Default
   - TransparentFX
