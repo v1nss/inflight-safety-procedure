@@ -110,11 +110,13 @@ public class SeatbeltConnector : MonoBehaviour
         if (triggerZone) triggerZone.enabled = false;
         if (target.triggerZone) target.triggerZone.enabled = false;
 
-        // Snap into place
-        transform.SetPositionAndRotation(target.attachPoint.position, target.attachPoint.rotation);
+        // This object snaps to target’s buckle
+        transform.SetPositionAndRotation(target.vestSnapPoint.position, target.vestSnapPoint.rotation);
+        transform.SetParent(target.vestSnapPoint, true);
+
+        // Target snaps to this object’s buckle
         target.transform.SetPositionAndRotation(vestSnapPoint.position, vestSnapPoint.rotation);
-        transform.SetPositionAndRotation(vestSnapPoint.position, vestSnapPoint.rotation);
-        transform.SetParent(target.attachPoint, true);
+        target.transform.SetParent(vestSnapPoint, true);
 
         // Update connection states
         isConnected = true;
