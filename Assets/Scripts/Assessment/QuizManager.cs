@@ -74,14 +74,14 @@ public class QuizManager : MonoBehaviour
         List<QuestionData> copy = new List<QuestionData>(source);
         List<QuestionData> result = new List<QuestionData>();
 
-        //for (int i = 0; i < count; i++)
-        //{
-        //    int rand = Random.Range(0, copy.Count);
-        //    result.Add(copy[rand]);
-        //    copy.RemoveAt(rand);
-        //}
+        for (int i = 0; i < count; i++)
+        {
+            int rand = Random.Range(0, copy.Count);
+            result.Add(copy[rand]);
+            copy.RemoveAt(rand);
 
-        result.Add(copy[0]);
+            Debug.Log(rand);
+        }
 
         return result;
     }
