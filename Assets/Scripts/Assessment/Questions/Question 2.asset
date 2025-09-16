@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 2
   m_EditorClassIdentifier: 
-  questionText: TANONG??
+  questionText: Where should passengers store their carry-on luggage during takeoff
+    and landing?
   answers:
-  - 'Hindi '
-  - Hindi
-  - Hindi
-  - Sagot
-  correctAnswerIndex: 3
+  - On their lap
+  - In the aisle
+  - Under the seat in front or in the overhead bin
+  correctAnswerIndex: 2

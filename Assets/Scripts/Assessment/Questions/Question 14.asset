@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 14
   m_EditorClassIdentifier: 
-  questionText: TANONG??
+  questionText: When using the life vest in water, how do you attract attention?
   answers:
-  - 'Hindi '
-  - Hindi
-  - Hindi
-  - Sagot
-  correctAnswerIndex: 3
+  - By waving your arms
+  - Using the whistle and light
+  - Shouting loudly
+  correctAnswerIndex: 1

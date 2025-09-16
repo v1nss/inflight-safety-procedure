@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 8
   m_EditorClassIdentifier: 
-  questionText: TANONG??
+  questionText: How should oxygen masks be used?
   answers:
-  - 'Hindi '
-  - Hindi
-  - Hindi
-  - Sagot
-  correctAnswerIndex: 3
+  - Secure your own mask before helping others
+  - 'Put it on children first '
+  - Share with your seatmate
+  correctAnswerIndex: 1

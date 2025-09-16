@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 20
   m_EditorClassIdentifier: 
-  questionText: TANONG??
+  questionText: What is the role of flight attendants during emergencies?
   answers:
-  - 'Hindi '
-  - Hindi
-  - Hindi
-  - Sagot
-  correctAnswerIndex: 3
+  - To ensure passenger comfort
+  - To assist with meals
+  - To direct and manage passenger evacuation
+  correctAnswerIndex: 2

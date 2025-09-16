@@ -19,12 +19,20 @@ public class QuizManager : MonoBehaviour
     private int currentQuestionIndex = 0;
     private int score = 0;
 
-    void Start()
+    void OnEnable()
     {
+        currentQuestionIndex = 0;
+        score = 0;
+        selectedQuestions.Clear();
         // Pick 10 random questions out of 20
         selectedQuestions = GetRandomQuestions(allQuestions, 10);
 
         DisplayQuestion();
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("Disabled :(");
     }
 
     void DisplayQuestion()
@@ -49,6 +57,7 @@ public class QuizManager : MonoBehaviour
             answerButtons[i].onClick.RemoveAllListeners();
             answerButtons[i].onClick.AddListener(() => OnAnswerSelected(index));
         }
+        Debug.Log($"HEHE {currentQuestionIndex}");
     }
 
     void OnAnswerSelected(int index)
