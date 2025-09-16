@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 2
   m_EditorClassIdentifier: 
-  questionText: Where should passengers store their carry-on luggage during takeoff
-    and landing?
+  questionText: How do you release the seatbelt?
   answers:
-  - On their lap
-  - In the aisle
-  - Under the seat in front or in the overhead bin
+  - Pull the strap all the way out
+  - Tug the belt sharply
+  - Lift the buckle flap or press the button
   correctAnswerIndex: 2

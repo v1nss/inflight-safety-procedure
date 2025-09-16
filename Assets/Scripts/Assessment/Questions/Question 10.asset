@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 10
   m_EditorClassIdentifier: 
-  questionText: What is the brace position used for?
+  questionText: 'Where are vomit bags usually found? '
   answers:
-  - To relax during long flights
-  - To reduce injury during impact
-  - To prevent ear pain
+  - ' In the overhead bin'
+  - In the seat-back pocket
+  - In the crew station
   correctAnswerIndex: 1

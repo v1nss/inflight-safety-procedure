@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 13
   m_EditorClassIdentifier: 
-  questionText: What should you do with your life vest during evacuation on land?
+  questionText: If you feel sick and no bag is available, what should you do?
   answers:
-  - Inflate inside the cabin
-  - Inflate outside the cabin
-  - Do not wear it
+  - Use your seatbelt pouch
+  - 'Tell the crew and ask for one '
+  - Use your seatbelt pouch
   correctAnswerIndex: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionText: When using the life vest in water, how do you attract attention?
   answers:
-  - By waving your arms
-  - Using the whistle and light
-  - Shouting loudly
-  correctAnswerIndex: 1
+  - 'Never tell them '
+  - Immediately unsealed
+  - 'Inside another bag '
+  correctAnswerIndex: 0

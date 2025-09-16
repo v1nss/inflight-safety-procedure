@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 4
   m_EditorClassIdentifier: 
-  questionText: When are passengers required to keep their seatbelts fastened?
+  questionText: How do you start oxygen flow in the mask?
   answers:
-  - Only during takeoff
-  - Only during landing
-  - Whenever seated
-  correctAnswerIndex: 2
+  - 'By turning a knob above your seat '
+  - 'By pulling the mask firmly toward you '
+  - 'By blowing into the mask '
+  correctAnswerIndex: 1

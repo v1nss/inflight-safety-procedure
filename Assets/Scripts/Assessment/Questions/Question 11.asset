@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 11
   m_EditorClassIdentifier: 
-  questionText: How should you locate the nearest emergency exit?
+  questionText: 'What should you do after using a vomit bag? '
   answers:
-  - Ask the crew during the flight
-  - Look at the safety card before takeoff
-  - Wait until an emergency occurs
-  correctAnswerIndex: 1
+  - Leave it unsealed
+  - Throw it on the floor
+  - 'Seal it and dispose of it safely '
+  correctAnswerIndex: 2

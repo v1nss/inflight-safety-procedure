@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 17
   m_EditorClassIdentifier: 
-  questionText: What should passengers do if smoke is present in the cabin?
+  questionText: What additional safety items are often attached to life vests?
   answers:
-  - Stand up and wave for help
-  - Stay seated until crew arrives
-  - Crawl low to avoid inhaling smoke
+  - 'A compass '
+  - A radio
+  - A light and a whistle
   correctAnswerIndex: 2

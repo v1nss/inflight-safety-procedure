@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 3
   m_EditorClassIdentifier: 
-  questionText: What does a seatbelt help prevent during turbulence?
+  questionText: What is the correct way to use an airsickness bag?
   answers:
-  - Motion sickness
-  - Passengers being thrown from their seat
-  - Loss of cabin pressure
-  correctAnswerIndex: 2
+  - Open, use close to your mouth, seal it, and dispose safely
+  - 'Leave it unsealed in the seat pocket '
+  - Flush it down the toilet immediately
+  correctAnswerIndex: 0

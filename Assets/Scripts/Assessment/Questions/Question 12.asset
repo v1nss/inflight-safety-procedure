@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 12
   m_EditorClassIdentifier: 
-  questionText: How many exit rows should you count between your seat and the nearest
-    exit?
+  questionText: "When using a vomit bag, what\u2019s the best posture? "
   answers:
-  - None
-  - At least 2
-  - At least 5
-  correctAnswerIndex: 1
+  - Lean slightly forward
+  - Lean backward
+  - Stand up
+  correctAnswerIndex: 0

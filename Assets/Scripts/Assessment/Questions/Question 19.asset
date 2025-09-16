@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 19
   m_EditorClassIdentifier: 
-  questionText: Why should high-heeled shoes be removed before using an evacuation
-    slide?
+  questionText: 'Where should the mask be placed? '
   answers:
-  - To prevent tripping
-  - To avoid damaging the slide
-  - To make running easier
-  correctAnswerIndex: 1
+  - Only over your mouth
+  - Over your chin
+  - Over your nose and mouth
+  correctAnswerIndex: 2
