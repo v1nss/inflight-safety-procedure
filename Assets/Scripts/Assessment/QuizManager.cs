@@ -38,6 +38,8 @@ public class QuizManager : MonoBehaviour
         QuestionData q = selectedQuestions[currentQuestionIndex];
         questionText.text = q.questionText;
 
+        //scoreText.text = "Your Score: " + score + " / " + selectedQuestions.Count;
+
         Debug.Log("Showing question: " + q.questionText);
 
         for (int i = 0; i < answerButtons.Length; i++)
@@ -56,6 +58,7 @@ public class QuizManager : MonoBehaviour
         if (index == q.correctAnswerIndex)
         {
             score++;
+            Debug.Log($"HI {score}");
         }
 
         currentQuestionIndex++;
@@ -79,8 +82,6 @@ public class QuizManager : MonoBehaviour
             int rand = Random.Range(0, copy.Count);
             result.Add(copy[rand]);
             copy.RemoveAt(rand);
-
-            Debug.Log(rand);
         }
 
         return result;
