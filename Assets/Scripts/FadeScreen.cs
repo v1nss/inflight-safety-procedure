@@ -1,62 +1,59 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FadeScreen : MonoBehaviour
 {
     public bool fadeOnStart = true;
-    public float fadeDuration = 2;
+    public float fadeDuration = 2f;
     public Color fadeColor;
     public AnimationCurve fadeCurve;
-    public string colorPropertyName = "_Color";
+    public string colorPropertyName = "_BaseColor";
     private Renderer rend;
 
-    // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<Renderer>();
-        rend.enabled = false;
+        rend.enabled = true;
 
         if (fadeOnStart)
-            FadeIn();
+        {
+            // Make sure GameObject is active before starting coroutine
+            gameObject.SetActive(true);
+            StartCoroutine(FadeIn());
+        }
     }
 
-    public void FadeIn()
+    public IEnumerator FadeOut()
     {
-        Fade(1, 0);
-    }
-    
-    public void FadeOut()
-    {
-        Fade(0, 1);
+        yield return StartCoroutine(Fade(0, 1));
     }
 
-    public void Fade(float alphaIn, float alphaOut)
+    public IEnumerator FadeIn()
     {
-        StartCoroutine(FadeRoutine(alphaIn,alphaOut));
+        yield return StartCoroutine(Fade(1, 0));
     }
 
-    public IEnumerator FadeRoutine(float alphaIn,float alphaOut)
+    private IEnumerator Fade(float alphaIn, float alphaOut)
     {
         rend.enabled = true;
 
-        float timer = 0;
-        while(timer <= fadeDuration)
+        float timer = 0f;
+        while (timer <= fadeDuration)
         {
             Color newColor = fadeColor;
             newColor.a = Mathf.Lerp(alphaIn, alphaOut, fadeCurve.Evaluate(timer / fadeDuration));
-
             rend.material.SetColor(colorPropertyName, newColor);
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        Color newColor2 = fadeColor;
-        newColor2.a = alphaOut;
-        rend.material.SetColor(colorPropertyName, newColor2);
+        // Make sure final alpha is applied
+        Color finalColor = fadeColor;
+        finalColor.a = alphaOut;
+        rend.material.SetColor(colorPropertyName, finalColor);
 
-        if(alphaOut == 0)
-            rend.enabled = false;
+        if (alphaOut == 0)
+            rend.enabled = false; // hide plane if fully transparent
     }
 }

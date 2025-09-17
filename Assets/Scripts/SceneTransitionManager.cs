@@ -11,44 +11,71 @@ public class SceneTransitionManager : MonoBehaviour
     private void Awake()
     {
         if (singleton && singleton != this)
-            Destroy(singleton);
-
+        {
+            Destroy(gameObject);
+            return;
+        }
         singleton = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void GoToScene(int sceneIndex)
     {
+        if (fadeScreen == null) return;
         StartCoroutine(GoToSceneRoutine(sceneIndex));
     }
 
     IEnumerator GoToSceneRoutine(int sceneIndex)
     {
-        fadeScreen.FadeOut();
-        yield return new WaitForSeconds(fadeScreen.fadeDuration);
-
-        //Launch the new scene
+        yield return StartCoroutine(fadeScreen.FadeOut());
         SceneManager.LoadScene(sceneIndex);
+
+        // Find fade screen in new scene if needed
+        if (fadeScreen == null)
+            fadeScreen = FindObjectOfType<FadeScreen>();
+
+        if (fadeScreen != null)
+        {
+            fadeScreen.gameObject.SetActive(true); // Ensure it's active
+            yield return StartCoroutine(fadeScreen.FadeIn());
+        }
     }
 
     public void GoToSceneAsync(int sceneIndex)
     {
+        if (fadeScreen == null) return;
         StartCoroutine(GoToSceneAsyncRoutine(sceneIndex));
     }
 
     IEnumerator GoToSceneAsyncRoutine(int sceneIndex)
     {
-        fadeScreen.FadeOut();
-        //Launch the new scene
+        yield return StartCoroutine(fadeScreen.FadeOut());
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         operation.allowSceneActivation = false;
 
-        float timer = 0;
-        while(timer <= fadeScreen.fadeDuration && !operation.isDone)
+        // Wait for loading to complete (90% means ready)
+        while (operation.progress < 0.9f)
         {
-            timer += Time.deltaTime;
             yield return null;
         }
 
         operation.allowSceneActivation = true;
+
+        // Wait for scene to actually load
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+
+        // Find fade screen in new scene if needed
+        if (fadeScreen == null)
+            fadeScreen = FindObjectOfType<FadeScreen>();
+
+        if (fadeScreen != null)
+        {
+            fadeScreen.gameObject.SetActive(true); // Ensure it's active
+            yield return StartCoroutine(fadeScreen.FadeIn());
+        }
     }
 }
