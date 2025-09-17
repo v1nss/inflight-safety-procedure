@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 16
   m_EditorClassIdentifier: 
-  questionText: "What\u2019s the first step in using a life vest?"
+  questionText: How should one begin the process of utilizing a life vest?
   answers:
   - Inflate it immediately
   - 'Put it over your head '

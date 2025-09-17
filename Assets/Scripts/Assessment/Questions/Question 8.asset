@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 8
   m_EditorClassIdentifier: 
-  questionText: How do you tighten your seatbelt?
+  questionText: How should the seatbelt be properly adjusted for a secured fit?
   answers:
   - 'Push the release flap '
   - Twist the buckle

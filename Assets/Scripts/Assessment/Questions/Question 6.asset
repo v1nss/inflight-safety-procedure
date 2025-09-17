@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 6
   m_EditorClassIdentifier: 
-  questionText: 'After evacuating through an exit, what should you do? '
+  questionText: 'What is the appropriate cause of action following evacuation via
+    an exit? '
   answers:
   - Stay near the aircraft to collect belongings
   - Take photos of the scene

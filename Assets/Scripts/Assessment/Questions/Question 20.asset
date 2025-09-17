@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 20
   m_EditorClassIdentifier: 
-  questionText: "What should you do if the bag on the mask doesn\u2019t inflate?"
+  questionText: How should a passenger proceed if the oxygen mask fails to inflate
+    as expected?
   answers:
   - "Assume oxygen isn\u2019t working"
   - Keep breathing normally

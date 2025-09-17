@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 15
   m_EditorClassIdentifier: 
-  questionText: 'Where is the life vest usually located? '
+  questionText: Where is the life vest typically stored on an aircraft?
   answers:
   - 'Under your seat '
   - In the cockpit

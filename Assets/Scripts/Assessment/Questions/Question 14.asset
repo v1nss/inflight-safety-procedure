@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae078fa2045279241bb1f6abd07660ac, type: 3}
   m_Name: Question 14
   m_EditorClassIdentifier: 
-  questionText: When using the life vest in water, how do you attract attention?
+  questionText: How should a used air sickness bag be respectfully and safely presented
+    to cabin crew?
   answers:
   - 'Never tell them '
   - Immediately unsealed
