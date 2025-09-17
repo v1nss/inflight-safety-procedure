@@ -81,9 +81,9 @@ public class AirSackUIManager : MonoBehaviour
 
         // Hook up the events
         vomitBagGrab.onBothHandsGrabbedEvent.AddListener(onBothHandsGrabbed);
-        vomitBagGrab.onBothHandsReleasedEvent.AddListener(onBothHandsReleased);
+        //vomitBagGrab.onBothHandsReleasedEvent.AddListener(onBothHandsReleased);
         vomitBagGrab.onContactWithBothHandsEvent.AddListener(onContactMade);
-        vomitBagGrab.onContactLostEvent.AddListener(onContactLost);
+        //vomitBagGrab.onContactLostEvent.AddListener(onContactLost);
     }
 
     private void UnhookVomitBagEvents()
