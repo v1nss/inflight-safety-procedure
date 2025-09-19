@@ -26,8 +26,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Practicum Scene/ExitDoors.unity
     guid: 712911e371c946d4fbf792b69d1252bb
+  - enabled: 1
+    path: Assets/Scenes/Assessment Scene/Assessment.unity
+    guid: 7edc233bddb5adb4d8c34de03e478269
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e2019c76666878a4ba7e21dc03f1836c, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 7845783348897024b973704f36bf96d8, type: 2}
   m_UseUCBPForAssetBundles: 0

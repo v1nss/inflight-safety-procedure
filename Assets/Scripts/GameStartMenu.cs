@@ -13,7 +13,7 @@ public class GameStartMenu : MonoBehaviour
 
     [Header("Main Menu Buttons")]
     public Button startButton;
-    public Button optionButton;
+    //public Button optionButton;
     public Button aboutButton;
     public Button quitButton;
 
@@ -32,7 +32,7 @@ public class GameStartMenu : MonoBehaviour
 
         //Hook events
         startButton.onClick.AddListener(StartGame);
-        optionButton.onClick.AddListener(EnableOption);
+        //optionButton.onClick.AddListener(EnableOption);
         aboutButton.onClick.AddListener(EnableAbout);
         quitButton.onClick.AddListener(QuitGame);
 
@@ -77,7 +77,7 @@ public class GameStartMenu : MonoBehaviour
         mainMenu.SetActive(false);
         options.SetActive(true);
         about.SetActive(false);
-    }
+    } 
     public void EnableAbout()
     {
         mainMenu.SetActive(false);
@@ -97,6 +97,8 @@ public class GameStartMenu : MonoBehaviour
     }
     public void StartAssessment()
     {
-        return;
+        HideAll();
+        safetyProcedures.SetActive(false);
+        SceneTransitionManager.singleton.GoToSceneAsync(7);
     }
 }
