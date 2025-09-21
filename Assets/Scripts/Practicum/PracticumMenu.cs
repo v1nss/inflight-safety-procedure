@@ -30,7 +30,7 @@ public class PracticumMenu : MonoBehaviour {
 
     public void StartSeatbelt()
     {
-
+        SceneTransitionManager.singleton.GoToSceneAsync(5);
     }
 
     public void StartLifevest()
@@ -45,7 +45,7 @@ public class PracticumMenu : MonoBehaviour {
 
     public void StartExitDoors()
     {
-
+        SceneTransitionManager.singleton.GoToSceneAsync(6);
     }
 
     public void QuitPracticum()
