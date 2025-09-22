@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class SceneCycler : MonoBehaviour
 {
-
     [Header("Scene Cycler Buttons")]
     public Button quitButton;
     public Button nextButton;
@@ -14,9 +13,18 @@ public class SceneCycler : MonoBehaviour
     private int maxIndex = 6;
 
 
-    void Start()
+    void OnEnable()
     {
         quitButton.onClick.AddListener(QuitScene);
+        nextButton.onClick.AddListener(LoadNextScene);
+    }
+
+    private void OnDisable()
+    {
+        quitButton.onClick.RemoveAllListeners();
+        quitButton.onClick.AddListener(QuitScene);
+
+        nextButton.onClick.RemoveAllListeners();
         nextButton.onClick.AddListener(LoadNextScene);
     }
 
@@ -33,7 +41,7 @@ public class SceneCycler : MonoBehaviour
         // If current is before the range, jump to start
         if (currentIndex < minIndex || currentIndex > maxIndex)
         {
-            SceneManager.LoadScene(minIndex);
+            SceneTransitionManager.singleton.GoToSceneAsync(currentIndex);
             return;
         }
 
@@ -46,6 +54,6 @@ public class SceneCycler : MonoBehaviour
             nextIndex = minIndex;
         }
 
-        SceneManager.LoadScene(nextIndex);
+        SceneTransitionManager.singleton.GoToSceneAsync(currentIndex);
     }
 }
