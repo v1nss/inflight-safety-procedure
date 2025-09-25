@@ -102,3 +102,7 @@ InitTestScene*.unity*
 /Assets/Airport Lounge/KYLE - Airport Lounge 2.fbx
 /Assets/Airport Lounge/KYLE - Airport Lounge 2.obj
 /Assets/Airport Lounge/KYLE - Airport Lounge 2.skp
+
+# Video files
+/Assets/Videos/*.mov
+/Assets/Videos/*.mp4
