@@ -35,7 +35,6 @@ public class DemonstrationUIManager : MonoBehaviour
 
         foreach (var item in returnButtons)
         {
-            Debug.Log("yeah: " + item);
             item.onClick.AddListener(EnableMainMenu);
         }
     }
