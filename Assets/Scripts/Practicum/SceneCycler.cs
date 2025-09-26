@@ -54,6 +54,6 @@ public class SceneCycler : MonoBehaviour
             nextIndex = minIndex;
         }
 
-        SceneTransitionManager.singleton.GoToSceneAsync(currentIndex);
+        SceneTransitionManager.singleton.GoToSceneAsync(nextIndex);
     }
 }
