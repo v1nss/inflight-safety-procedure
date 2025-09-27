@@ -8,7 +8,7 @@ public class Sound
     public string name;
     public AudioClip clip;
     [Range(0, 1)]
-    public float volume = 1;
+    public float volume = 10;
     [Range(-3, 3)]
     public float pitch = 1;
     public bool loop = false;
@@ -17,7 +17,7 @@ public class Sound
 
     public Sound()
     {
-        volume = 1;
+        volume = 10;
         pitch = 1;
         loop = false;
     }
@@ -32,7 +32,16 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // persist across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         foreach (Sound s in sounds)
         {
@@ -47,6 +56,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.spatialBlend = 0f; // force 2D so it sounds like Inspector preview
         }
     }
 

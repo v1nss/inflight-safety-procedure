@@ -2634,15 +2634,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: uiclick
-    clip: {fileID: 8300000, guid: c00193f69f150124cbf3f5671b986b63, type: 3}
-    volume: 0.5
+    clip: {fileID: 8300000, guid: dde8c70f43d8f4142b0e047c667cb0e3, type: 3}
+    volume: 1
     pitch: 0
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
   - name: uihoverenter
-    clip: {fileID: 8300000, guid: c6dd68b4c268b8b48bb866311bf7ede6, type: 3}
-    volume: 0.5
+    clip: {fileID: 8300000, guid: 89068d78175272b4f800c7604d1bef0b, type: 3}
+    volume: 1
     pitch: 0
     loop: 0
     playOnAwake: 0
