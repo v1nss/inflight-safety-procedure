@@ -7,13 +7,14 @@ public class Sound
 {
     public string name;
     public AudioClip clip;
-    [Range(0, 1)]
-    public float volume = 10;
-    [Range(-3, 3)]
-    public float pitch = 1;
+    [Range(0f, 1f)]
+    public float volume = 1f;
+    [Range(-3f, 3f)]
+    public float pitch = 1f;
     public bool loop = false;
     public bool playOnAwake = false;
     public AudioSource source;
+
 
     public Sound()
     {
@@ -28,6 +29,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
+    public AudioSource uiSfxSource;
     //AudioManager
 
     void Awake()
@@ -35,7 +37,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // persist across scenes
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -56,8 +58,13 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-            s.source.spatialBlend = 0f; // force 2D so it sounds like Inspector preview
+            s.source.spatialBlend = 0f;
         }
+
+        if (uiSfxSource == null)
+            uiSfxSource = gameObject.AddComponent<AudioSource>();
+
+        uiSfxSource.spatialBlend = 0f;
     }
 
     public void Play(string name)
@@ -77,5 +84,13 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         s.source.Stop();
+    }
+
+    public void PlayUISound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null) return;
+
+        uiSfxSource.PlayOneShot(s.clip, s.volume);
     }
 }
