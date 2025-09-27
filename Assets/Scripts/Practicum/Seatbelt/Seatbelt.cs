@@ -156,7 +156,7 @@ public class Seatbelt : MonoBehaviour
         target.isBuckled = true;
 
         Debug.Log($"{gameObject.name} and {target.gameObject.name} buckled together!");
-
+        AudioManager.instance.PlayUISound("buckle");
         // Notify LineManager that seatbelt is buckled
         if (lineManager != null)
         {

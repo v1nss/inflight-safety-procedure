@@ -2646,6 +2646,13 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
+  - name: buckle
+    clip: {fileID: 8300000, guid: 66b955505907514459e00157138132eb, type: 3}
+    volume: 0.141
+    pitch: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
   uiSfxSource: {fileID: 0}
 --- !u!224 &922578595
 RectTransform:

@@ -125,7 +125,7 @@ public class SeatbeltConnector : MonoBehaviour
         target.connectedTo = this;
 
         Debug.Log($"{gameObject.name} connected to {target.gameObject.name}");
-
+        AudioManager.instance.PlayUISound("buckle");
         OnConnected(target);
         target.OnConnected(this);
     }
