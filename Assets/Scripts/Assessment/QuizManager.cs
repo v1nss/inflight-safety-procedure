@@ -21,12 +21,13 @@ public class QuizManager : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log("Showing question: " + allQuestions);
         currentQuestionIndex = 0;
         score = 0;
         selectedQuestions.Clear();
-        // Pick 10 random questions out of 20
+        // Pick 10 random questions out of 106
         selectedQuestions = GetRandomQuestions(allQuestions, 10);
-
+        Debug.Log("Showing question: " + allQuestions);
         DisplayQuestion();
     }
 
